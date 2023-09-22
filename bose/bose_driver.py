@@ -48,6 +48,9 @@ class BoseDriver(webdriver.Chrome):
     def prompt(self, text="Press Enter To Continue..."):
         return beep_input(text, self.beep)
 
+    def very_short_random_sleep(self):
+        sleep_for_n_seconds(random.uniform(0.5,1))
+
     def short_random_sleep(self):
         sleep_for_n_seconds(random.uniform(2, 4))
 
