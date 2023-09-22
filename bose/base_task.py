@@ -131,11 +131,11 @@ class BaseTask():
                 task.end()
                 task.set_ip()
                 data = task.get_data()
-                driver.save_screenshot(final_image)
+                # driver.save_screenshot(final_image)
                 
-                html_path  = f'{self.task_path}/page.html'
-                source = get_page_source_safe(driver)
-                write_html(source, html_path)
+                # html_path  = f'{self.task_path}/page.html'
+                # source = get_page_source_safe(driver)
+                # write_html(source, html_path)
 
                 data["last_url"] = get_driver_url_safe(driver)
                 
@@ -144,12 +144,12 @@ class BaseTask():
                     data["retry_attempt"] = retry_attempt
 
 
-                task_info_path  = f'{self.task_path}/task_info.json'
+                # task_info_path  = f'{self.task_path}/task_info.json'
                 
                 if driver._init_data is not None:
                     data = merge_dicts_in_one_dict(data , driver._init_data)
                 
-                write_json(data , task_info_path)
+                # write_json(data , task_info_path)
                 Analytics.send_tracking_data(task_name)
             count = LocalStorage.get_item('count', 0) + 1
             LocalStorage.set_item('count', count)
@@ -157,7 +157,7 @@ class BaseTask():
             self.task_path = f'tasks/{count}' 
             self.task_id = count
 
-            create_directories(self.task_path)
+            # create_directories(self.task_path)
             
             task.start()
 
@@ -190,7 +190,7 @@ class BaseTask():
                 result = self.run(driver, data)
                 end_task(driver)
                 close_driver(driver)
-                print(f'View Final Screenshot at {final_image_path}')
+                # print(f'View Final Screenshot at {final_image_path}')
                 return result
             except RetryException as error:
                 end_task(driver)
@@ -201,6 +201,7 @@ class BaseTask():
                 exception_log = traceback.format_exc()
                 traceback.print_exc()
                 end_task(driver)
+                create_directories(self.task_path)
                 
                 error_log_path  = f'{self.task_path}/error.log'
                 write_file(exception_log, error_log_path)
