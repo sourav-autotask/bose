@@ -147,7 +147,6 @@ def exit_with_failed_status():
 
 
 def sleep_for_n_seconds(n):
-    print(f"Sleeping for {n} seconds...")
     sleep(n)
 
 
