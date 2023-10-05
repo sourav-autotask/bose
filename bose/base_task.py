@@ -198,13 +198,13 @@ class BaseTask():
                 print('Task is being Retried!')
                 return run_task(True, retry_attempt + 1)
             except Exception as error:
-                exception_log = traceback.format_exc()
+                # exception_log = traceback.format_exc()
                 traceback.print_exc()
                 end_task(driver)
-                create_directories(self.task_path)
+                # create_directories(self.task_path)
                 
-                error_log_path  = f'{self.task_path}/error.log'
-                write_file(exception_log, error_log_path)
+                # error_log_path  = f'{self.task_path}/error.log'
+                # write_file(exception_log, error_log_path)
 
                 IS_PRODUCTION = os.environ.get("ENV") == "production"
 
@@ -214,7 +214,7 @@ class BaseTask():
                     
                 close_driver(driver)
 
-                print(f'Task Failed! View Final Screenshot at {final_image_path}')
+                # print(f'Task Failed! View Final Screenshot at {final_image_path}')
                 return result
 
         final = run_task(False, 0)
